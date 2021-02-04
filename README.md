@@ -1,13 +1,13 @@
 # Gocialite
 ![Travis CI build](https://api.travis-ci.org/danilopolani/gocialite.svg?branch=master)
 ![Available Drivers](https://img.shields.io/badge/Drivers-5+-orange.svg)
-[![GoDoc](https://godoc.org/github.com/danilopolani/gocialite?status.svg)](https://godoc.org/github.com/danilopolani/gocialite)
-[![GoReport](https://goreportcard.com/badge/github.com/danilopolani/gocialite)](https://goreportcard.com/report/github.com/danilopolani/gocialite)
+[![GoDoc](https://godoc.org/github.com/Logmint-Inc/gocialite?status.svg)](https://godoc.org/github.com/Logmint-Inc/gocialite)
+[![GoReport](https://goreportcard.com/badge/github.com/Logmint-Inc/gocialite)](https://goreportcard.com/report/github.com/Logmint-Inc/gocialite)
 ![GitHub contributors](https://img.shields.io/github/contributors/danilopolani/gocialite.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## NOT MAINTAINED
-This project is no longer maintained.  
+This project is no longer maintained.
 
 ----
 
@@ -32,12 +32,12 @@ To install it, just run `go get gopkg.in/danilopolani/gocialite.v1` and include 
 
 ## Create new driver
 
-Please see [Contributing page](https://github.com/danilopolani/gocialite/blob/master/CONTRIBUTING.md) to learn how to create new driver and test it.
+Please see [Contributing page](https://github.com/Logmint-Inc/gocialite/blob/master/CONTRIBUTING.md) to learn how to create new driver and test it.
 
 ## Set scopes
 
-**Note**: Gocialite set some default scopes for the user profile, for example for *Facebook* it specify `email` and for *Google* `profile, email`.  
-When you use the following method, you don't have to rewrite them. 
+**Note**: Gocialite set some default scopes for the user profile, for example for *Facebook* it specify `email` and for *Google* `profile, email`.
+When you use the following method, you don't have to rewrite them.
 
 Use the `Scopes([]string)` method of your `Gocial` instance. Example:
 
@@ -72,7 +72,7 @@ func main() {
 ```
 
 Then create a route to use as redirect bridge, for example `/auth/github`. With this route, the user will be redirected to the provider oAuth login. In this case we use Gin Tonic as router. You have to specify the provider with the `Driver()` method.
-Then, with `Scopes()`, you can set a list of scopes as slice of strings. It's optional.  
+Then, with `Scopes()`, you can set a list of scopes as slice of strings. It's optional.
 Finally, with `Redirect()` you can obtain the redirect URL. In this method you have to pass three parameters:
 
 1. Client ID
@@ -93,7 +93,7 @@ func redirectHandler(c *gin.Context) {
 	authURL, err := gocial.New().
 		Driver("github"). // Set provider
 		Scopes([]string{"public_repo"}). // Set optional scope(s)
-		Redirect( // 
+		Redirect( //
 			"xxxxxxxxxxxxxx", // Client ID
 			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", // Client Secret
 			"http://localhost:9090/auth/github/callback", // Redirect URL
@@ -110,10 +110,10 @@ func redirectHandler(c *gin.Context) {
 }
 ```
 
-Now create a callback handler route, where we'll receive the content from the provider.  
-In order to validate the oAuth and retrieve the data, you have to invoke the `Handle()` method with two query parameters: `state` and `code`. In your URL, they will look like this: `http://localhost:9090/auth/github/callback?state=xxxxxxxx&code=xxxxxxxx`.  
-The `Handle()` method returns the user info, the token and error if there's one or `nil`.  
-If there are no errors, in the `user` variable you will find the logged in user information and in the `token` one, the token info (it's a [oauth2.Token struct](https://godoc.org/golang.org/x/oauth2#Token)). The data of the user - which is a [gocialite.User struct](https://github.com/danilopolani/gocialite/blob/master/structs/user.go) - are the following:
+Now create a callback handler route, where we'll receive the content from the provider.
+In order to validate the oAuth and retrieve the data, you have to invoke the `Handle()` method with two query parameters: `state` and `code`. In your URL, they will look like this: `http://localhost:9090/auth/github/callback?state=xxxxxxxx&code=xxxxxxxx`.
+The `Handle()` method returns the user info, the token and error if there's one or `nil`.
+If there are no errors, in the `user` variable you will find the logged in user information and in the `token` one, the token info (it's a [oauth2.Token struct](https://godoc.org/golang.org/x/oauth2#Token)). The data of the user - which is a [gocialite.User struct](https://github.com/Logmint-Inc/gocialite/blob/master/structs/user.go) - are the following:
 
 - ID
 - FirstName
@@ -158,7 +158,7 @@ func callbackHandler(c *gin.Context) {
 }
 ```
 
-Please take a look to [multi provider example](https://github.com/danilopolani/gocialite/wiki/Multi-provider-example) for a full working code with Gin Tonic and variable provider handler.
+Please take a look to [multi provider example](https://github.com/Logmint-Inc/gocialite/wiki/Multi-provider-example) for a full working code with Gin Tonic and variable provider handler.
 
 ## Contributors
 
